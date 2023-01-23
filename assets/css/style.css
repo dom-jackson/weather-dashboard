@@ -21,3 +21,11 @@ h1 {
     border: 2px solid black;
     width: 75%;
 }
+
+#search-location {
+    border: 2px solid red;
+}
+#five-day-forecast {
+    display: flex;
+    border: 2px solid blue;
+}
