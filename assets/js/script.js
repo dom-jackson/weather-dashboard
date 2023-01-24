@@ -94,12 +94,13 @@ function searchlocationForecast() {
       
         if (firstForecast) {
           var currentWeather = document.createElement("div");
-          currentWeather.innerHTML = `<h2>${cityName} ${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind Speed: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
+          currentWeather.innerHTML = `<h2>${cityName} ${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
           searchResult.appendChild(currentWeather);
           firstForecast = false;
         } else {
           var fiveDayWeather = document.createElement("div");
-          fiveDayWeather.innerHTML = `<h2>${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind Speed: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
+          fiveDayWeather.classList.add("five-day-tiles");
+          fiveDayWeather.innerHTML = `<h2>${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
           fiveDay.appendChild(fiveDayWeather);
         }
       }
@@ -110,6 +111,7 @@ function searchlocationForecast() {
 for (let i = 0; i < searchArray.length; i++) {
   let storedSearch = searchArray[i];
   let storedSearchBtn = document.createElement("button");
+  storedSearchBtn.classList.add("stored-search-buttons")
   storedSearchBtn.textContent = storedSearch;
   searchList.appendChild(storedSearchBtn);
 
