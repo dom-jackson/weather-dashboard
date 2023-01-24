@@ -16,7 +16,7 @@ submitButton.addEventListener("click", function () {
 // geocode api to return the latitude and longitude of the searched location
 function geocodingLocation() {
   var requestUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "//api.openweathermap.org/geo/1.0/direct?q=" +
     searchInput +
     "&limit=1&appid=" +
     apiKey;
@@ -41,7 +41,7 @@ function geocodingLocation() {
 function searchlocationForecast() {
 
   var requestUrl =
-    "http://api.openweathermap.org/data/2.5/forecast?lat=" +
+    "//api.openweathermap.org/data/2.5/forecast?lat=" +
     lat +
     "&lon=" +
     lon +
