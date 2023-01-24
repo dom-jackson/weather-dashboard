@@ -6,6 +6,7 @@ var lat;
 var lon;
 var submitButton = document.getElementById("search-btn");
 var data;
+let searchArray = JSON.parse(localStorage.getItem("searchArray")) || [];
 
 submitButton.addEventListener("click", function () {
   searchInput = document.getElementById("search-bar").value;
@@ -38,6 +39,7 @@ function geocodingLocation() {
 }
 
 function searchlocationForecast() {
+
   var requestUrl =
     "http://api.openweathermap.org/data/2.5/forecast?lat=" +
     lat +
@@ -57,9 +59,12 @@ function searchlocationForecast() {
       } else {
         console.log("City name not found");
       }
+      searchArray.push(searchInput);
+      localStorage.setItem("searchArray", JSON.stringify(searchArray));
 
       let currentDate;
       let forecastForEachDay = {};
+      
 
       for (let i = 0; i < data.list.length; i++) {
         let date = new Date(data.list[i].dt_txt);
@@ -75,6 +80,9 @@ function searchlocationForecast() {
           forecastForEachDay[currentDate] = data.list[i];
         }
       }
+
+      searchResult.innerHTML = "";
+      fiveDay.innerHTML = "";
       let firstForecast = true;
       for (let date in forecastForEachDay) {
         let forecast = forecastForEachDay[date];
@@ -97,4 +105,16 @@ function searchlocationForecast() {
       }
       console.log(forecastForEachDay);
     });
+}
+
+for (let i = 0; i < searchArray.length; i++) {
+  let storedSearch = searchArray[i];
+  let storedSearchBtn = document.createElement("button");
+  storedSearchBtn.textContent = storedSearch;
+  searchList.appendChild(storedSearchBtn);
+
+  storedSearchBtn.addEventListener("click", function(){
+    searchInput = storedSearch;
+    geocodingLocation();
+  });
 }
