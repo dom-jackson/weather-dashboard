@@ -10,7 +10,7 @@ I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
 
 ## Screenshot
-<img src=".\assets\images\ReadME-Screenshot-2023-01-24.png"
+<img src=".\assets\images\ReadME-Screenshot-2023-01-24.png">
 
 ## Usage
 
