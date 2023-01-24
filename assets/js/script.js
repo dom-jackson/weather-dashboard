@@ -7,13 +7,13 @@ var lon;
 var submitButton = document.getElementById("search-btn");
 var data;
 let searchArray = JSON.parse(localStorage.getItem("searchArray")) || [];
-
+// Search Button clicked with search value included
 submitButton.addEventListener("click", function () {
   searchInput = document.getElementById("search-bar").value;
   geocodingLocation(); //add in geocoding function parameter when ready
   console.log("clicked");
 });
-
+// geocode api to return the latitude and longitude of the searched location
 function geocodingLocation() {
   var requestUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -37,7 +37,7 @@ function geocodingLocation() {
       console.log(error);
     });
 }
-
+// 5 dayforecast api call using the latitude and longitude from geocoding function
 function searchlocationForecast() {
 
   var requestUrl =
@@ -62,10 +62,9 @@ function searchlocationForecast() {
       searchArray.push(searchInput);
       localStorage.setItem("searchArray", JSON.stringify(searchArray));
 
+      // iterates through data and creates forecastForEachDay object where each key is  the first instance of each day in the data.
       let currentDate;
       let forecastForEachDay = {};
-      
-
       for (let i = 0; i < data.list.length; i++) {
         let date = new Date(data.list[i].dt_txt);
         let formattedDate =
@@ -80,7 +79,7 @@ function searchlocationForecast() {
           forecastForEachDay[currentDate] = data.list[i];
         }
       }
-
+      // sets variables for the required data from the data list into the forecastForEachDay variable. 
       searchResult.innerHTML = "";
       fiveDay.innerHTML = "";
       let firstForecast = true;
@@ -91,7 +90,7 @@ function searchlocationForecast() {
         let windSpeed = forecast.wind.speed;
         let weatherHumidity = forecast.main.humidity;
         let forecastDate = new Date(forecast.dt_txt).toLocaleDateString();
-      
+      // creates divs with the required data presented in a readable HTML format
         if (firstForecast) {
           var currentWeather = document.createElement("div");
           currentWeather.innerHTML = `<h2>${cityName} ${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
@@ -104,10 +103,9 @@ function searchlocationForecast() {
           fiveDay.appendChild(fiveDayWeather);
         }
       }
-      console.log(forecastForEachDay);
     });
 }
-
+// displays the stored searches as buttons in the search list, that can perform the above functions.
 for (let i = 0; i < searchArray.length; i++) {
   let storedSearch = searchArray[i];
   let storedSearchBtn = document.createElement("button");
