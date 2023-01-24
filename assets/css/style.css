@@ -78,3 +78,28 @@ h1 {
     border-style: none;
     font-weight: bold;
 }
+
+@media only screen and (max-width: 576px) {
+    #container {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+    }
+    #search {
+        width: 100%;
+    }
+    #weather {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #five-day-forecast {
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 100%;
+    }
+    .five-day-tiles {
+        margin-bottom: 8px;
+    }
+}
