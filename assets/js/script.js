@@ -86,6 +86,7 @@ function searchlocationForecast() {
       for (let date in forecastForEachDay) {
         let forecast = forecastForEachDay[date];
         let weatherIcon = forecast.weather[0].icon;
+        let weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         let maxTemp = forecast.main.temp_max;
         let windSpeed = forecast.wind.speed;
         let weatherHumidity = forecast.main.humidity;
@@ -93,18 +94,19 @@ function searchlocationForecast() {
       // creates divs with the required data presented in a readable HTML format
         if (firstForecast) {
           var currentWeather = document.createElement("div");
-          currentWeather.innerHTML = `<h2>${cityName} ${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
+          currentWeather.innerHTML = `<h2>${cityName} ${forecastDate}</h2><img src=${weatherIconUrl}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
           searchResult.appendChild(currentWeather);
           firstForecast = false;
         } else {
           var fiveDayWeather = document.createElement("div");
           fiveDayWeather.classList.add("five-day-tiles");
-          fiveDayWeather.innerHTML = `<h2>${forecastDate}</h2><img src=${weatherIcon}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
+          fiveDayWeather.innerHTML = `<h2>${forecastDate}</h2><img src=${weatherIconUrl}> <p>Max Temp: ${maxTemp}*C</p> <p>Wind: ${windSpeed} m/s</p> <p>Humidity: ${weatherHumidity}%</p>`;
           fiveDay.appendChild(fiveDayWeather);
         }
       }
     });
 }
+
 // displays the stored searches as buttons in the search list, that can perform the above functions.
 for (let i = 0; i < searchArray.length; i++) {
   let storedSearch = searchArray[i];
